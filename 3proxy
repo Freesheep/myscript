@@ -16,8 +16,8 @@
 
 NAME=3proxy
 BIN=/usr/local/bin/3proxy
-if [ -f /etc/3porxy.cfg ]; then
-    CONF=/etc/3porxy.cfg
+if [ -f /etc/3proxy.cfg ]; then
+    CONF=/etc/3proxy.cfg
 fi
 RETVAL=0
 
