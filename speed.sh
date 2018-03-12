@@ -71,6 +71,7 @@ speed() {
     speed_test 'https://sjo-ca-us-ping.vultr.com/vultr.com.100MB.bin' 'Vultr,Silicon Valley, California'
     speed_test 'https://lax-ca-us-ping.vultr.com/vultr.com.100MB.bin' 'Vultr,Los Angeles, California'
     speed_test 'https://syd-au-ping.vultr.com/vultr.com.100MB.bin' 'Vultr,Sydney, Australia'
+    speed_test 'http://172.247.192.138/100mb.test' 'cloudradium,America'
 }
 
 io_test() {
