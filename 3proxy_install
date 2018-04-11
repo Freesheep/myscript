@@ -69,7 +69,7 @@ log /var/log/3proxy/3proxy.log D
 logformat "- +_L%t.%. %N.%p %E %U %C:%c %R:%r %O %I %h %T"
 rotate 30
 #Auth type
-1auth strong
+auth strong
 #Binding address
 #external /etc/network/interfaces
 #external $./external.ip
