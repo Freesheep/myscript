@@ -21,7 +21,7 @@
          "protocolparam" : "",
          "remarks" : "",
          "server" : "1.1.1.1",
-         "server_port" : 1111,
+         "server_port" : 8180,
          "server_udp_port" : 0,
          "type" : 6,
          "udp_over_tcp" : 0,
