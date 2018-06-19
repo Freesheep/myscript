@@ -237,7 +237,7 @@ pre_install(){
 
     #read -p "Which cipher you'd select(Default: ${ciphers[1]}):" pick
     #默认加密
-    pick="chacha20-ietf"
+    pick="11"
 
     [ -z "$pick" ] && pick=2
     expr ${pick} + 1 &>/dev/null
@@ -267,7 +267,7 @@ pre_install(){
         echo -e "${green}${i}${plain}) ${hint}"
     done
     #read -p "Which protocol you'd select(Default: ${protocols[0]}):" protocol
-    protocol="auth_aes128_md5"
+    protocol="5"
 
     [ -z "$protocol" ] && protocol=1
     expr ${protocol} + 1 &>/dev/null
@@ -298,7 +298,7 @@ pre_install(){
     done
     #read -p "Which obfs you'd select(Default: ${obfs[0]}):" r_obfs
     #默认r_obfs
-    r_obfs="tls1.2_ticket_auth"
+    r_obfs="6"
 
     [ -z "$r_obfs" ] && r_obfs=1
     expr ${r_obfs} + 1 &>/dev/null
@@ -444,18 +444,18 @@ install(){
         /etc/init.d/shadowsocks start
 
         clear
-        echo
-        echo -e "Congratulations, ShadowsocksR server install completed!"
-        echo -e "Your Server IP        : \033[41;37m $(get_ip) \033[0m"
-        echo -e "Your Server Port      : \033[41;37m ${shadowsocksport} \033[0m"
-        echo -e "Your Password         : \033[41;37m ${shadowsockspwd} \033[0m"
-        echo -e "Your Protocol         : \033[41;37m ${shadowsockprotocol} \033[0m"
-        echo -e "Your obfs             : \033[41;37m ${shadowsockobfs} \033[0m"
-        echo -e "Your Encryption Method: \033[41;37m ${shadowsockscipher} \033[0m"
-        echo
-        echo "Welcome to visit:https://shadowsocks.be/9.html"
-        echo "Enjoy it!"
-        echo
+        #echo
+        #echo -e "Congratulations, ShadowsocksR server install completed!"
+        #echo -e "Your Server IP        : \033[41;37m $(get_ip) \033[0m"
+        #echo -e "Your Server Port      : \033[41;37m ${shadowsocksport} \033[0m"
+        #echo -e "Your Password         : \033[41;37m ${shadowsockspwd} \033[0m"
+        #echo -e "Your Protocol         : \033[41;37m ${shadowsockprotocol} \033[0m"
+        #echo -e "Your obfs             : \033[41;37m ${shadowsockobfs} \033[0m"
+        #echo -e "Your Encryption Method: \033[41;37m ${shadowsockscipher} \033[0m"
+        #echo
+        #echo "Welcome to visit:https://shadowsocks.be/9.html"
+        #echo "Enjoy it!"
+        #echo
     else
         echo "ShadowsocksR install failed, please Email to Teddysun <i@teddysun.com> and contact"
         install_cleanup
