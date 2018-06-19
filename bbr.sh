@@ -3,9 +3,6 @@ PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin:~/bin
 export PATH
 
 
-#Check Root
-[ $(id -u) != "0" ] && { echo "Error: You must be root to run this script"; exit 1; }
-
 #Check OS
 if [[ -f /etc/redhat-release ]]; then
 		release="centos"
