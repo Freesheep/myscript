@@ -1,0 +1,154 @@
+安装x-ui：
+
+bash <(curl -Ls https://raw.githubusercontent.com/vaxilu/x-ui/master/install.sh)
+
+#项目地址：https://github.com/sjlleo/netflix-verify
+
+#下载检测解锁程序
+wget -O nf https://github.com/sjlleo/netflix-verify/releases/download/v3.1.0/nf_linux_amd64 && chmod +x nf
+
+#执行
+./nf
+
+# 项目地址：https://p3terx.com/archives/cloudflare-warp-configuration-script.html
+
+# 自动配置 WARP WireGuard 双栈全局网络
+bash <(curl -fsSL git.io/warp.sh) d
+
+# 自动配置 WARP WireGuard IPv4 网络
+bash <(curl -fsSL git.io/warp.sh) 4
+
+# 自动配置 WARP WireGuard IPv6 网络
+bash <(curl -fsSL git.io/warp.sh) 6
+
+# Cloudflare WARP 一键配置脚本 功能菜单
+bash <(curl -fsSL git.io/warp.sh) menu
+
+#项目地址：https://github.com/zu1k/good-mitm
+
+# 生成自签CA私钥和证书
+./good-mitm genca
+
+# 执行good-mitm
+./good-mitm run -r netflix.yaml
+
+# 后台执行
+nohup ./good-mitm run -r netflix.yaml > goodmitm.log 2>&1 &
+
+
+# good-mitm配置文件
+- name: "netflix"
+  mitm: "*.netflix.com"
+  filters:
+    url-regex: '^https:\/\/(www\.)?netflix\.com'
+  actions:
+    - modify-request:
+        cookie:
+          key: NetflixId
+          value: 填入你的NetflixId
+    - modify-request:
+        cookie:
+          key: SecureNetflixId
+          value: 填入你的SecureNetflixId
+    - modify-response:
+        cookie:
+          key: NetflixId
+          remove: true
+    - modify-response:
+        cookie:
+          key: SecureNetflixId
+          remove: true
+          
+ x-ui配置模板
+ {
+  "api": {
+    "services": [
+      "HandlerService",
+      "LoggerService",
+      "StatsService"
+    ],
+    "tag": "api"
+  },
+  "inbounds": [
+    {
+        "listen": "127.0.0.1",
+        "port": 30000, 
+        "protocol": "socks", 
+        "sniffing": {
+            "enabled": true,
+            "destOverride": ["http", "tls"]
+        }
+    }
+  ],
+  "outbounds": [
+    {
+      "protocol": "freedom",
+      "settings": {}
+    },
+    {
+        "tag": "netflix_proxy",
+        "protocol": "http",
+        "settings": {
+         "servers": [
+           {
+             "address": "127.0.0.1",
+             "port": 34567
+           }
+         ]
+        },
+        "streamSettings": {
+             "security": "none",
+             "tlsSettings": {
+               "allowInsecure": false
+            }
+        }
+    },
+    {
+      "protocol": "blackhole",
+      "settings": {},
+      "tag": "blocked"
+    }
+  ],
+  "policy": {
+    "system": {
+      "statsInboundDownlink": true,
+      "statsInboundUplink": true
+    }
+  },
+  "routing": {
+    "rules": [
+      {
+        "type": "field",
+        "outboundTag": "netflix_proxy",
+        "domain": [
+          "geosite:netflix"
+        ]
+      },
+      {
+        "inboundTag": [
+          "api"
+        ],
+        "outboundTag": "api",
+        "type": "field"
+      },
+      {
+        "ip": [
+          "geoip:private"
+        ],
+        "outboundTag": "blocked",
+        "type": "field"
+      },
+      {
+        "outboundTag": "blocked",
+        "protocol": [
+          "bittorrent"
+        ],
+        "type": "field"
+      }
+    ]
+  },
+  "stats": {}
+}
+
+证书检测工具
+https://docs.microsoft.com/zh-cn/sysinternals/downloads/sigcheck
