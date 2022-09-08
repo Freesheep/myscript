@@ -152,3 +152,6 @@ nohup ./good-mitm run -r netflix.yaml > goodmitm.log 2>&1 &
 
 证书检测工具
 https://docs.microsoft.com/zh-cn/sysinternals/downloads/sigcheck
+
+v2ray 代理域名组
+https://github.com/v2ray/domain-list-community
